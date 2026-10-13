@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEON RIVALS: Two-Player Battle Racing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="stage" data-state="menu">
+    <canvas id="game" width="1280" height="720"></canvas>
+
+    <!-- In-race HUD -->
+    <div id="hud">
+      <div class="panel p1">
+        <div class="pname">PLAYER 1</div>
+        <div class="stats">
+          <span class="pos" id="p1-pos">1ST</span>
+          <span class="lap">LAP <b id="p1-lap">1</b>/3</span>
+        </div>
+        <div class="item">
+          <span class="slot" id="p1-item"></span>
+          <span class="key">L-SHIFT</span>
+        </div>
+        <div class="status" id="p1-status"></div>
+      </div>
+
+      <div class="center">
+        <div id="timer">0:00.00</div>
+        <div class="btns">
+          <button id="btn-pause" title="Pause (P / Esc)">❚❚</button>
+          <button id="btn-restart" title="Restart race">↻</button>
+          <button id="btn-mute" title="Mute (M)">🔊</button>
+        </div>
+      </div>
+
+      <div class="panel p2">
+        <div class="pname">PLAYER 2</div>
+        <div class="stats">
+          <span class="pos" id="p2-pos">2ND</span>
+          <span class="lap">LAP <b id="p2-lap">1</b>/3</span>
+        </div>
+        <div class="item">
+          <span class="slot" id="p2-item"></span>
+          <span class="key">ENTER</span>
+        </div>
+        <div class="status" id="p2-status"></div>
+      </div>
+    </div>
+
+    <div id="countdown"></div>
+    <div id="banner"></div>
+
+    <!-- Main menu -->
+    <div id="menu" class="overlay">
+      <h1 class="logo"><span class="pink">NEON</span> <span class="blue">RIVALS</span></h1>
+      <p class="tagline">TWO-PLAYER BATTLE RACING</p>
+      <div class="menu-btns">
+        <button class="big" id="btn-play">▶ PLAY</button>
+        <button class="big alt" id="btn-how">INSTRUCTIONS</button>
+        <button class="small" id="btn-menu-mute">SOUND: ON</button>
+      </div>
+      <div class="quick">
+        <span class="pink">P1</span> W A S D + L-SHIFT
+        <i>•</i>
+        <span class="blue">P2</span> ARROWS + ENTER
+        <i>•</i> FIRST TO 3 LAPS
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div id="instructions" class="overlay solid hidden">
+      <h2>HOW TO PLAY</h2>
+      <div class="cols">
+        <div class="card p1">
+          <h3>PLAYER 1</h3>
+          <div class="keys"><kbd>W</kbd> accelerate</div>
+          <div class="keys"><kbd>S</kbd> brake / reverse</div>
+          <div class="keys"><kbd>A</kbd> <kbd>D</kbd> steer</div>
+          <div class="keys"><kbd>L-SHIFT</kbd> or <kbd>Q</kbd> use power-up</div>
+        </div>
+        <div class="card mid">
+          <h3>POWER-UPS</h3>
+          <div class="pu">⚡ <b>Turbo</b> — burst of speed</div>
+          <div class="pu">🛢️ <b>Oil Slick</b> — drop a slippery trap behind you</div>
+          <div class="pu">🚀 <b>Rocket</b> — homing missile, spins your rival out</div>
+          <div class="pu">🛡️ <b>Shield</b> — blocks one attack</div>
+          <div class="pu">🔄 <b>Reverse</b> — flips your rival's steering</div>
+        </div>
+        <div class="card p2">
+          <h3>PLAYER 2</h3>
+          <div class="keys"><kbd>↑</kbd> accelerate</div>
+          <div class="keys"><kbd>↓</kbd> brake / reverse</div>
+          <div class="keys"><kbd>←</kbd> <kbd>→</kbd> steer</div>
+          <div class="keys"><kbd>ENTER</kbd> use power-up</div>
+        </div>
+      </div>
+      <p class="rules">
+        Drive through the glowing <b>?</b> boxes to grab a power-up. Pass every checkpoint in order —
+        the first driver to finish <b>3 laps</b> wins. <kbd>P</kbd> pause &nbsp; <kbd>M</kbd> mute
+      </p>
+      <button class="big" id="btn-back">BACK</button>
+    </div>
+
+    <!-- Pause -->
+    <div id="pause" class="overlay solid hidden">
+      <h2>PAUSED</h2>
+      <div class="menu-btns">
+        <button class="big" id="btn-resume">RESUME</button>
+        <button class="big alt" id="btn-pause-restart">RESTART</button>
+        <button class="big alt" id="btn-pause-menu">MAIN MENU</button>
+      </div>
+    </div>
+
+    <!-- Victory -->
+    <div id="victory" class="overlay hidden">
+      <div class="trophy">🏆</div>
+      <h2 class="winner" id="winner-text">PLAYER 1 WINS!</h2>
+      <p class="stats-line" id="winner-stats"></p>
+      <div class="menu-btns row">
+        <button class="big" id="btn-rematch">REMATCH</button>
+        <button class="big alt" id="btn-victory-menu">MAIN MENU</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
